@@ -5,6 +5,9 @@ import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessa
 import { Input } from './ui/input'
 import { FormFieldType } from './forms/PatientForm'
 import Image from "next/image"
+import "react-phone-number-input/style.css"
+import PhoneInput from "react-phone-number-input"
+import { E164Number } from "libphonenumber-js/core"
 
 interface CustomProps{
     control: Control<any>,
@@ -28,9 +31,9 @@ const RenderField = ({ field, props}: {field: any; props: CustomProps}) => {
             case FormFieldType.INPUT:
                 return(
                     <div className="flex rounded-md border border-dark-500 bg-dark-400">
-                        {props.iconSrc && (
+                        {iconSrc && (
                              <Image 
-                             src={props.iconSrc} 
+                             src={iconSrc} 
                              height={24}
                              width={24}
                              alt={iconAlt || "icon"}
@@ -45,6 +48,20 @@ const RenderField = ({ field, props}: {field: any; props: CustomProps}) => {
                     </FormControl>
                     </div>
                 )
+            case FormFieldType.PHONE_INPUT:
+                  return(
+                        
+                      <FormControl>
+                           <PhoneInput
+                            defaultCountry='PE'
+                            placeholder={placeholder}
+                            international
+                            withCountryCallingCode
+                            value={field.value as E164Number | undefined}
+                            onChange={field.onChange}
+                            className='input-phone'/>
+                      </FormControl>
+                  )
         }
 
 }

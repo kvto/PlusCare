@@ -26,6 +26,10 @@
   }
 }
 
+.border {
+   border-width: 0px; 
+}
+
 @layer utilities {
   /* ===== UTILITIES */
   .sidebar {
