@@ -28,6 +28,7 @@ export const createUser = async (user: CreateUserParams) => {
     );
 
     return parseStringify(newuser);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // Check existing user
     if (error && error?.code === 409) {

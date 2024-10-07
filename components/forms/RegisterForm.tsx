@@ -9,7 +9,7 @@ import SubmitButton from "../SubmitButton"
 import { useState } from "react"
 import { PatientFormValidation } from "@/lib/validation"
 import { useRouter } from "next/navigation";
-import { createUser, registerPatient } from "@/lib/actions/patient.action"
+import { registerPatient } from "@/lib/actions/patient.action"
 import { FormFieldType } from "./PatientForm";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Doctors, GenderOptions, IdentificationTypes, PatientFormDefaultValues } from "@/constants";
@@ -34,7 +34,7 @@ const RegisterForm = ({user}: {user: User}) => {
       phone: "",
     },
   })
- 
+
   const onSubmit = async (values: z.infer<typeof PatientFormValidation>) => {
     setIsLoading(true);
       

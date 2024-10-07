@@ -30,7 +30,7 @@ interface CustomProps{
 }
 
 const RenderField = ({ field, props}: {field: any; props: CustomProps}) => {
-    const {fieldType, iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat, renderSkeleton} = props;
+    const { iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat, renderSkeleton} = props;
     
     switch(props.fieldType){
             case FormFieldType.INPUT:
@@ -99,22 +99,21 @@ const RenderField = ({ field, props}: {field: any; props: CustomProps}) => {
                 </div>
               )
 
-            case FormFieldType.SELECT:
-              return(
-                <FormControl>
-                  <Select onValueChange={field.onChange}
-                  defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger className='shad-select-trigger'>
-                       <SelectValue placeholder={placeholder}/> 
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent className='shad-select-content'>
-                      {props.children}
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-              )
+              case FormFieldType.SELECT:
+                return (
+                  <FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="shad-select-trigger">
+                          <SelectValue placeholder={props.placeholder} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="shad-select-content">
+                        {props.children}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                );
 
             case FormFieldType.SKELETON:
               return renderSkeleton ? renderSkeleton (field) : null
@@ -140,14 +139,14 @@ const RenderField = ({ field, props}: {field: any; props: CustomProps}) => {
 }
 
 const CustomFormField = (props: CustomProps) => {
-    const {control, fieldType, name, label} = props;
+    const {control, name, label} = props;
   return (
     <FormField
           control={control}
           name={name}
           render={({ field }) => (
             <FormItem className="flex-1">
-              {fieldType !== FormFieldType.CHECKBOX && label && (
+              {props.fieldType !== FormFieldType.CHECKBOX && label && (
                 <FormLabel>{label}</FormLabel>
               )}
 
